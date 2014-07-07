@@ -30,6 +30,8 @@ In Action!
 
 Let's see how the plugin works in a practical example...
 
+![](http://www.morellowebdesign.com/samples/dragg/dragg1.jpg)
+
 ```
 <div id="containerA" style="margin:5px;heigh:200px;width:200px;">
   <img id="image" src="milo.jpg" />
@@ -53,7 +55,10 @@ $(document).on('dragstart', '#image', function(e){
 });
 ```
 
+![](http://www.morellowebdesign.com/samples/dragg/dragg2.jpg)
+
 When the `dragstart` event is fired on our draggable element we can store a clone of that element in a variable...
+
 
 ```
 $(document).on('drag', '#helper', function(e){
@@ -62,6 +67,8 @@ $(document).on('drag', '#helper', function(e){
 ```
 
 While dragging we can listen for the `drag` event to be fired on our helper and, for example, lower its opacity to make it see-through...
+
+![](http://www.morellowebdesign.com/samples/dragg/dragg3.jpg) ![](http://www.morellowebdesign.com/samples/dragg/dragg4.jpg)
 
 ```
 $(document).on('dragin', '#containerB', function(e){
@@ -76,6 +83,8 @@ $(document).on('dragout', '#containerB', function(e){
 The `dragin` event can be used to fire a function on the target element in this case we are going to highlight the target area changing the background color.
 
 The `dragout` event has the opposite pourpose, it is fired upon leaving the target area and in our example it's used to reset the background color to the original one.
+
+![](http://www.morellowebdesign.com/samples/dragg/dragg5.jpg)
 
 ```
 $(document).on('drop', #containerB', function(e){
