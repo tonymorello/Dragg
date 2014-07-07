@@ -36,6 +36,8 @@
 			
 			$(element).mousedown(function(e){
 				
+				e.preventDefault();
+				
 				if (e.target == element){
 					
 					if($.isFunction(options.onStart)) {
