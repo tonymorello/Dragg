@@ -11,25 +11,35 @@ $(document).ready(function(e) {
 	$('#milo').dragg();
 	
 	var content;
+	var	counter = 0;
 	
 	$(document).on('dragstart', '#milo', function(e){
 		content=$(this).clone();
+		counter = 0;
+		$('#log').append('<div>dragstart fired</div>');
+		$('#log').append('<div class="draglog"></div>');
 	});
 	
 	$(document).on('drag', '#helper', function(e){
 		$(this).css('opacity', 0.5);
+		
+		counter = parseInt(counter) + 1;
+		$('.draglog:last').html('drag fired '+counter+' times');
 	});
 	
 	$(document).on('dragin', '#containerB', function(e){
 		$(this).css('background-color', '#F00');
+		$('#log').append('<div>dragin fired on #'+$(this).prop("id")+'</div>');
 	});
 	
 	$(document).on('dragout', '#containerB', function(e){
 		$(this).css('background-color', '');
+		$('#log').append('<div>dragout fired on #'+$(this).prop("id")+'</div>');
 	});
 	
 	$(document).on('drop', '#containerB', function(e){
 		$(this).html(content);
+		$('#log').append('<div>drop fired on #'+$(this).prop("id")+'</div>');
 		$('#milo').remove();
 	});
 	
@@ -43,7 +53,9 @@ $(document).ready(function(e) {
 </div>
 <div id="containerB" style="margin:5px;width:100px;height:100px;border:thin solid #00F;"></div>
 
-
+<pre id="log">
+	
+</pre>
 
 
 </body>
