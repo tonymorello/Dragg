@@ -18,7 +18,7 @@ Additionally a `dragstart` event is fired on the same selector.
 This callback is fired as soon as the mouse starts moving when dragging the element to its destination and it keeps firing as long as the mouse moves. Its default selector is the element directly under the mouse pointer at that point in time.
 During this stage you may want to highlight the target element or check whether the area you are currently on is your "drop zone".
 
-Additionally 2 events are fired, the `drag` event fired on the element that is being dragged around and the `dragover` event is fired upon the element directly underneath the mouse pointer at that point in time. 
+Additionally 3 events are fired, the `drag` event fired on the element that is being dragged around and the `dragin` event is fired when the mouse enters an element and `dragout` when the mouse leaves an element.
 
 ### onDrop
 This is the last callback and it's fired when the mouse button is released. Its default selector is the element directly under the mouse at the time of the "drop".
@@ -64,12 +64,18 @@ $(document).on('drag', '#helper', function(e){
 While dragging we can listen for the `drag` event to be fired on our helper and, for example, lower its opacity to make it see-through...
 
 ```
-$(document).on('dragover', '#containerB', function(e){
+$(document).on('dragin', '#containerB', function(e){
   $(this).css('background-color' : '#ff0000');
+});
+
+$(document).on('dragout', '#containerB', function(e){
+  $(this).css('background-color' : '');
 });
 ```
 
-The `dragover` event can be used to fire a function on the target element in this case we are going to highlight the target area changing the background color.
+The `dragin` event can be used to fire a function on the target element in this case we are going to highlight the target area changing the background color.
+
+The `dragout` event has the opposite pourpose, it is fired upon leaving the target area and in our example it's used to reset the background color to the original one.
 
 ```
 $(document).on('drop', #containerB', function(e){
@@ -79,4 +85,6 @@ $(document).on('drop', #containerB', function(e){
 ```
 
 Finally the `drop` event is used to determine what action to perform on the element "drop". In this case we transfer the previously stored content to the target div and remove the original selector.
+
+SEE THE **[DEMO HERE](http://www.morellowebdesign.com/samples/dragg/)**
 
