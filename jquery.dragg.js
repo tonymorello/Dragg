@@ -2,118 +2,135 @@
 	
 	$.fn.dragg = function(options) {
 		
-		var options	= options || {};
-		var onStart	= options.onStart	|| function(){}
-		var onDrag	= options.onDrag	|| function(){}
-		var onDrop	= options.onDrop	|| function(){}
-		
-		var pY,
-			pX,
-			offset,
-			width,
-			height,
-			left,
-			top,
-			grabY,
-			grabX,
-			clone,
-			original,
-			mouse,
-			hover;
-		
-		this.on('mousedown', function(e){
+		this.each(function(e){
+			dragg(this, options);
 			
-			if (e.target == this){
-				
-				if($.isFunction(onStart)) {
-					onStart.call(this);
-				}
-				
-				$(this).trigger('dragstart');
-				
-				mouse = 'down';
-				
-				e.stopPropagation();
-				
-				pY = e.pageY;
-				pX = e.pageX;
-				offset = $(this).offset();
-				width = $(this).width();
-				height = $(this).height();
-				
-				grabY = pY - offset.top;
-				grabX = pX - offset.left;
-				
-				original = $(this);
-				clone = $(this).clone();
-				
-				original.css('visibility' , 'hidden');
-							
-				clone.css({
-					'position' : 'absolute',
-					'z-index' : 1000,
-					'width' : width,
-					'left' : offset.left,
-					'top' : offset.top,
-				});
-				
-				clone.attr('id', 'dragging');
-				
-				clone.appendTo('body');
-				
-				$('body').mousemove(function(e){
-					
-					e.preventDefault();
-					
-					if(mouse == 'down'){
-												
-						pY = e.pageY;
-						pX = e.pageX;
-						
-						left = pX - grabX;
-						top = pY - grabY;
-						
-						clone.hide();
-						hover = document.elementFromPoint(pX, pY);
-						clone.show();
-						
-						clone.css({
-							'left' : left,
-							'top' : top
-						});
-						
-						if($.isFunction(onDrag)) {
-							onDrag.call(hover);
-						}
-						
-						clone.trigger('drag');
-						hover.trigger('dragover');
-						
-					}
-									
-				});
-				
-				$('body').mouseup(function(e){
-					
-					mouse = 'up';
-					
-					if($.isFunction(onDrop)) {
-						$('body').one('mouseover', function(e){
-							onDrop.call($(e.target));
-							
-							$(e.target).trigger('drop');
-							
-						});
-					}
-					
-					clone.remove();
-					original.css('visibility', 'visible');
-										
-				});
-			
-			}
-						
 		});
+		
+		
+		function dragg(element, options){
+			
+			var defaults = {
+				helper	:	'helper',
+				onStart	:	function(){},
+				onDrag	:	function(){},
+				onDrop	:	function(){}
+			}; 
+			
+			var options = $.extend({}, defaults, options); 
+			
+			var pY,
+				pX,
+				offset,
+				width,
+				height,
+				left,
+				top,
+				grabY,
+				grabX,
+				clone,
+				original,
+				mouse,
+				hover,
+				old_hover;
+			
+			$(element).mousedown(function(e){
+				
+				if (e.target == element){
+					
+					if($.isFunction(options.onStart)) {
+						options.onStart.call(element);
+					}
+					
+					$(element).trigger('dragstart');
+					
+					mouse = 'down';
+					
+					e.stopPropagation();
+					
+					pY = e.pageY;
+					pX = e.pageX;
+					offset = $(element).offset();
+					width = $(element).width();
+					height = $(element).height();
+					
+					grabY = pY - offset.top;
+					grabX = pX - offset.left;
+					
+					original = $(element);
+					clone = $(element).clone();
+					
+					original.css('visibility' , 'hidden');
+								
+					clone.css({
+						'position' : 'absolute',
+						'z-index' : 1000,
+						'width' : width,
+						'left' : offset.left,
+						'top' : offset.top,
+					});
+					
+					clone.attr('id', options.helper);
+					
+					clone.appendTo('body');
+					
+					$('body').mousemove(function(e){
+						
+						e.preventDefault();
+						
+						if(mouse == 'down'){
+													
+							pY = e.pageY;
+							pX = e.pageX;
+							
+							left = pX - grabX;
+							top = pY - grabY;
+							
+							clone.hide();
+							old_hover = hover;
+							hover = document.elementFromPoint(pX, pY);
+							clone.show();
+							
+							clone.css({
+								'left' : left,
+								'top' : top
+							});
+							
+							if($.isFunction(options.onDrag)) {
+								options.onDrag.call(hover);
+							}
+							
+							$(clone).trigger('drag');
+							
+							if(old_hover!=hover){
+								$(hover).trigger('dragin');
+								$(old_hover).trigger('dragout');
+							}
+							
+						}
+										
+					});
+					
+					$('body').one('mouseup', function(e){
+						
+						mouse = 'up';
+						
+						$(hover).trigger('drop');
+						
+						if($.isFunction(options.onDrop)) {
+							options.onDrop.call($(hover));
+						}						
+						
+						clone.remove();
+						original.css('visibility', '');
+											
+					});
+				
+				}
+							
+			});
+			
+		}
 				
 	}
 	
