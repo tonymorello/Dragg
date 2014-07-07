@@ -29,6 +29,8 @@
 					onStart.call(this);
 				}
 				
+				$(this).trigger('dragstart');
+				
 				mouse = 'down';
 				
 				e.stopPropagation();
@@ -71,11 +73,11 @@
 						left = pX - grabX;
 						top = pY - grabY;
 						
-						$('#dragging').hide();
+						clone.hide();
 						hover = document.elementFromPoint(pX, pY);
-						$('#dragging').show();
+						clone.show();
 						
-						$('#dragging').css({
+						clone.css({
 							'left' : left,
 							'top' : top
 						});
@@ -83,6 +85,10 @@
 						if($.isFunction(onDrag)) {
 							onDrag.call(hover);
 						}
+						
+						clone.trigger('drag');
+						hover.trigger('dragover');
+						
 					}
 									
 				});
@@ -90,9 +96,13 @@
 				$('body').mouseup(function(e){
 					
 					mouse = 'up';
+					
 					if($.isFunction(onDrop)) {
 						$('body').one('mouseover', function(e){
 							onDrop.call($(e.target));
+							
+							$(e.target).trigger('drop');
+							
 						});
 					}
 					
