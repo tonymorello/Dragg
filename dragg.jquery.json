@@ -3,11 +3,11 @@
     "title": "jQuery Dragg",
     "description": "jQuery plugin for Drag and Drop support.",
     "keywords": [
-        "drag and drop",
+        "drag-and-drop",
         "draggable",
         "droppable"
     ],
-    "version": "1.0",
+    "version": "1.0.0",
     "author": {
         "name": "Tony Morello",
         "url": "https://github.com/tonymorello"
