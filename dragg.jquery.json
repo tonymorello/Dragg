@@ -1,0 +1,35 @@
+{
+    "name": "dragg",
+    "title": "jQuery Dragg",
+    "description": "jQuery plugin for Drag and Drop support.",
+    "keywords": [
+        "drag and drop",
+        "draggable",
+        "droppable"
+    ],
+    "version": "1.0",
+    "author": {
+        "name": "Tony Morello",
+        "url": "https://github.com/tonymorello"
+    },
+    "maintainers": [
+        {
+            "name": "Tony Morello",
+            "email": "tony@morellowebdesign.com",
+            "url": "http://www.morellowebdesign.com"
+        }
+    ],
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://opensource.org/licenses/MIT"
+        }
+    ],
+    "bugs": "https://github.com/tonymorello/Dragg/issues",
+    "homepage": "https://github.com/tonymorello/Dragg",
+    "docs": "https://github.com/tonymorello/Dragg/",
+    "download": "https://github.com/tonymorello/Dragg/releases",
+    "dependencies": {
+        "jquery": ">=1.5"
+    }
+}
