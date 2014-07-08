@@ -27,7 +27,7 @@
     ],
     "bugs": "https://github.com/tonymorello/Dragg/issues",
     "homepage": "https://github.com/tonymorello/Dragg",
-    "docs": "https://github.com/tonymorello/Dragg/",
+    "demo": "http://www.morellowebdesign.com/samples/dragg/",
     "download": "https://github.com/tonymorello/Dragg/releases",
     "dependencies": {
         "jquery": ">=1.5"
