@@ -2,33 +2,34 @@ Dragg.js
 ========
 
 Dragg is a simple and lightweight jQuery plugin that turns any html elements (such as div, img or p) into draggable (and droppable) elements.
-Dragg is what HTML5 "Drag and Drop" should have been, providing a basic structure for your to expand and customize in your applications.
+Dragg is what HTML5 "Drag and Drop" should have been, providing a basic structure for you to expand and customize in your web applications.
 
 How it works
 ------------
-To set an element as "draggable" call the plugin `dragg()` on the jQuery selector. Profit.
-The selected element can now be dragged around your page, now you need to set what you want to happen in the 3 stages of the "drag and drop" action `onStart`, `onDrag`, `onDrop` via callbacks.
+To set an element as "draggable" call the plugin `dragg()` on the jQuery selector.
+The selected element can now be dragged around your page, now you need to set what you want to happen in the 3 stages of the "drag and drop" action `onStart`, `onDrag`, `onDrop` via callbacks and/or custom events.
 
 ### onSart
-Is the first callback to be fired and has as default selector (this) the **original** element that was set as draggable.
+Is the first stage and callback to be fired and has as default selector (this) the **original** element that was set as draggable.
 At this stage you may generally want to collect some information about the item you want to drag.
 
-Additionally a `dragstart` event is fired on the same selector.
+Also a `dragstart` event is fired on the same selector.
+
 ### onDrag
 This callback is fired as soon as the mouse starts moving when dragging the element to its destination and it keeps firing as long as the mouse moves. Its default selector is the element directly under the mouse pointer at that point in time.
 During this stage you may want to highlight the target element or check whether the area you are currently on is your "drop zone".
 
-Additionally 3 events are fired, the `drag` event fired on the element that is being dragged around and the `dragin` event is fired when the mouse enters an element and `dragout` when the mouse leaves an element.
+3 events are fired during this stage, the `drag` event fired on the helper that is being dragged around and the `dragin` event is fired when the mouse enters any of the html elements on the page and `dragout` when the mouse leaves them.
 
 ### onDrop
-This is the last callback and it's fired when the mouse button is released. Its default selector is the element directly under the mouse at the time of the "drop".
+This is the last stage and callback and it's fired when the mouse button is released. The callback's default selector is the element directly under the mouse at the time of the "drop".
 
-Finally an additional `drop` event is fired on the same "target" element.
+Finally the `drop` event is fired on the same "target" element.
 
 In Action!
 ----------
 
-Let's see how the plugin works in a practical example...
+Let's see how the plugin works in a practical example using all of the custom events provided...
 
 ![](http://www.morellowebdesign.com/samples/dragg/dragg1.jpg)
 
@@ -96,4 +97,3 @@ $(document).on('drop', #containerB', function(e){
 Finally the `drop` event is used to determine what action to perform on the element "drop". In this case we transfer the previously stored content to the target div and remove the original selector.
 
 SEE THE **[DEMO HERE](http://www.morellowebdesign.com/samples/dragg/)**
-
