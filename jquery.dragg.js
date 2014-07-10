@@ -44,8 +44,6 @@
 						options.onStart.call(element);
 					}
 					
-					$(element).trigger('dragstart');
-					
 					mouse = 'down';
 					
 					e.stopPropagation();
@@ -75,6 +73,8 @@
 					clone.attr('id', options.helper);
 					
 					clone.appendTo('body');
+					
+					$(element).trigger('dragstart');
 					
 					$('body').mousemove(function(e){
 						
@@ -117,7 +117,7 @@
 						
 						mouse = 'up';
 						
-						$(hover).trigger('drop');
+						$(element).trigger('drop');
 						
 						if($.isFunction(options.onDrop)) {
 							options.onDrop.call($(hover));
