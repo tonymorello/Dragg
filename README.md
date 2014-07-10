@@ -13,18 +13,18 @@ The selected element can now be dragged around your page, now you need to set wh
 Is the first stage and callback to be fired and has as default selector (this) the **original** element that was set as draggable.
 At this stage you may generally want to collect some information about the item you want to drag.
 
-Also a `dragstart` event is fired on the same selector.
+Also a `dragstart` event is triggered on the same selector.
 
 ### onDrag
 This callback is fired as soon as the mouse starts moving when dragging the element to its destination and it keeps firing as long as the mouse moves. Its default selector is the element directly under the mouse pointer at that point in time.
 During this stage you may want to highlight the target element or check whether the area you are currently on is your "drop zone".
 
-3 events are fired during this stage, the `drag` event fired on the helper that is being dragged around and the `dragin` event is fired when the mouse enters any of the html elements on the page and `dragout` when the mouse leaves them.
+3 events are fired during this stage, the `drag` event is triggered on the helper that is being dragged around and the `dragin` event is triggered when the mouse enters any of the html elements on the page and `dragout` when the mouse leaves them.
 
 ### onDrop
 This is the last stage and callback and it's fired when the mouse button is released. The callback's default selector is the element directly under the mouse at the time of the "drop".
 
-Finally the `drop` event is fired on the same "target" element.
+Finally the `drop` event is triggered on the original element.
 
 In Action!
 ----------
