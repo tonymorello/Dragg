@@ -4,9 +4,7 @@
 		
 		this.each(function(e){
 			dragg(this, options);
-			
 		});
-		
 		
 		function dragg(element, options){
 			
@@ -44,10 +42,9 @@
 						options.onStart.call(element);
 					}
 					
-					mouse = 'down';
-					
 					e.stopPropagation();
 					
+					mouse = 'down';
 					pY = e.pageY;
 					pX = e.pageX;
 					offset = $(element).offset();
@@ -68,11 +65,7 @@
 						'width' : width,
 						'left' : offset.left,
 						'top' : offset.top,
-					});
-					
-					clone.attr('id', options.helper);
-					
-					clone.appendTo('body');
+					}).attr('id', options.helper).appendTo('body');
 					
 					$(element).trigger('dragstart');
 					
@@ -81,10 +74,8 @@
 						e.preventDefault();
 						
 						if(mouse == 'down'){
-													
 							pY = e.pageY;
 							pX = e.pageX;
-							
 							left = pX - grabX;
 							top = pY - grabY;
 							
@@ -108,24 +99,17 @@
 								$(hover).trigger('dragin');
 								$(old_hover).trigger('dragout');
 							}
-							
 						}
-										
 					});
 					
 					$('body').one('mouseup', function(e){
-						
 						mouse = 'up';
-						
 						$(element).trigger('drop');
-						
 						if($.isFunction(options.onDrop)) {
 							options.onDrop.call($(hover));
 						}						
-						
 						clone.remove();
 						original.css('visibility', '');
-											
 					});
 				
 				}
