@@ -1,7 +1,7 @@
 (function( $ ){
 	
 	var runDragg = function(options){
-				
+		
 		var pY,
 			pX,
 			offset,
@@ -18,6 +18,11 @@
 			old_hover,
 			target;
 		
+		$(document).mousemove(function(e) {
+            pY = e.pageY;
+			pX = e.pageX;
+        });
+		
 		$(this).mousedown(function(e){
 			
 			e.preventDefault();
@@ -31,8 +36,7 @@
 				e.stopPropagation();
 				
 				mouse = 'down';
-				pY = e.pageY;
-				pX = e.pageX;
+				
 				offset = $(this).offset();
 				width = $(this).width();
 				height = $(this).height();
@@ -60,8 +64,7 @@
 					e.preventDefault();
 					
 					if(mouse == 'down'){
-						pY = e.pageY;
-						pX = e.pageX;
+						
 						left = pX - grabX;
 						top = pY - grabY;
 						
@@ -139,9 +142,5 @@
 		return methods[method].call(this, options);
 		
 	}
-	
-	
-	
-	
 	
 })( jQuery );
