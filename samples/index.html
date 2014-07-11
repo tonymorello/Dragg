@@ -14,7 +14,7 @@ $(document).ready(function(e) {
 	var	counter = 0;
 	
 	$(document).on('dragstart', '#milo', function(e){
-		content=$(this).clone();
+		content=$(this);
 		counter = 0;
 		$('#log').append('<div>dragstart fired</div>');
 		$('#log').append('<div class="draglog"></div>');
@@ -27,20 +27,19 @@ $(document).ready(function(e) {
 		$('.draglog:last').html('drag fired '+counter+' times');
 	});
 	
-	$(document).on('dragin', '#containerB', function(e){
+	$(document).on('dragin', '.container', function(e){
 		$(this).css('background-color', '#F00');
 		$('#log').append('<div>dragin fired on #'+$(this).prop("id")+'</div>');
 	});
 	
-	$(document).on('dragout', '#containerB', function(e){
+	$(document).on('dragout', '.container', function(e){
 		$(this).css('background-color', '');
 		$('#log').append('<div>dragout fired on #'+$(this).prop("id")+'</div>');
 	});
 	
-	$(document).on('drop', '#containerB', function(e){
-		$(this).html(content);
+	$(document).on('drop', '.container', function(e){
+		$(content).appendTo(this);
 		$('#log').append('<div>drop fired on #'+$(this).prop("id")+'</div>');
-		$('#milo').remove();
 	});
 	
 });
@@ -49,10 +48,10 @@ $(document).ready(function(e) {
 
 <body>
 <a href="https://github.com/tonymorello/Dragg"><img style="position: fixed; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
-<div id="containerA" style="margin:5px;width:200px;height:200px;border:thin solid #F00;">
+<div class="container" id="containerA" style="margin:5px;width:200px;height:200px;border:thin solid #F00;">
 	<img id="milo" src="milo.jpg" style="width:100%;" />
 </div>
-<div id="containerB" style="margin:5px;width:100px;height:100px;border:thin solid #00F;"></div>
+<div class="container" id="containerB" style="margin:5px;width:100px;height:100px;border:thin solid #00F;"></div>
 
 <pre id="log">
 	
