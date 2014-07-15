@@ -7,7 +7,7 @@
         "draggable",
         "droppable"
     ],
-    "version": "1.0.1",
+    "version": "1.0.2",
     "author": {
         "name": "Tony Morello",
         "url": "https://github.com/tonymorello"
@@ -30,6 +30,6 @@
     "demo": "http://www.morellowebdesign.com/samples/dragg/",
     "download": "https://github.com/tonymorello/Dragg/releases",
     "dependencies": {
-        "jquery": ">=1.5"
+        "jquery": ">=1.7"
     }
 }
